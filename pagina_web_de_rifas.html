@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pabe con Causa – Rifa con Causa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<header class="bg-green-600 text-white p-6 shadow-lg">
+  <div class="max-w-6xl mx-auto flex justify-between items-center">
+    <div class="flex items-center gap-4">
+      <!-- Espacio para logo -->
+      <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-green-600 font-bold">
+        LOGO
+      </div>
+      <h1 class="text-2xl font-bold">🎟️ Pabe con Causa</h1>
+    </div>
+    <span class="text-sm">Pago por transferencia (Mercado Pago)</span>
+  </div>
+</header>
+
+<section class="bg-white py-12">
+  <div class="max-w-4xl mx-auto mb-10">
+    <h2 class="text-2xl font-bold text-center mb-4">🎁 Premio de la Rifa</h2>
+    <div class="flex justify-center">
+      <img src="https://via.placeholder.com/600x350?text=Foto+del+Premio" alt="Premio" class="rounded-2xl shadow-lg" />
+    </div>
+    <p class="text-center text-sm text-gray-600 mt-2">Imagen ilustrativa del premio</p>
+  </div>
+  <div class="max-w-3xl mx-auto">
+    <h3 class="text-2xl font-bold mb-4">Registro del boleto</h3>
+    <form class="space-y-4">
+      <input type="text" placeholder="Nombre completo" class="w-full border p-3 rounded-xl" />
+      <input type="tel" placeholder="WhatsApp" class="w-full border p-3 rounded-xl" />
+      <input type="text" id="boletoSeleccionado" placeholder="Boleto seleccionado" readonly class="w-full border p-3 rounded-xl bg-gray-100" />
+      <div class="bg-gray-50 p-4 rounded-xl text-sm">
+        <p><strong>Datos de transferencia:</strong></p>
+        <p>Banco: Mercado Pago (SPEI)<br>CLABE: TU_CLABE_MERCADO_PAGO<br>Nombre: Pabe con Causa<br>Concepto: Boleto ##</p>
+      </div>
+      <button type="button" onclick="enviarWhatsApp()" class="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700">Enviar comprobante por WhatsApp</button>
+    </form>
+  </div>
+</section>
+
+<section class="py-12">
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded-2xl shadow">
+    <h3 class="text-2xl font-bold mb-4 text-center">¿Cómo se elige al ganador?</h3>
+    <p class="text-sm mb-2">El ganador se determina utilizando los <strong>últimos 2 números del Premio Mayor de la Lotería Nacional</strong> del sorteo previamente anunciado.</p>
+    <p class="text-sm mb-2">Ejemplo: si el Premio Mayor es <strong>38427</strong>, el boleto ganador será el <strong>27</strong>.</p>
+    <p class="text-sm mb-2">En caso de que el resultado sea <strong>00</strong>, el boleto ganador será el <strong>00</strong>.</p>
+    <p class="text-sm text-gray-600">El resultado oficial será publicado con evidencia del sorteo.</p>
+  </div>
+</section>
+
+<section class="py-12">
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded-2xl shadow">
+    <h3 class="text-2xl font-bold mb-4 text-center">Rifa con causa – Transparencia</h3>
+    <p class="text-sm mb-2">Esta rifa es organizada por un tercero con el objetivo de apoyar una causa específica.</p>
+    <p class="text-sm mb-2">El organizador cobra un <strong>15% del total recaudado</strong> por gastos de <strong>administración, difusión y gestión</strong>.</p>
+    <p class="text-sm mb-2">El <strong>85% restante</strong> será entregado íntegramente a la causa indicada.</p>
+    <p class="text-sm text-gray-600">El proceso será documentado para garantizar transparencia.</p>
+  </div>
+</section>
+
+<section class="py-12">
+  <div class="max-w-6xl mx-auto">
+    <h3 class="text-2xl font-bold mb-6 text-center">Selecciona tus boletos</h3>
+    <p class="text-center text-sm text-gray-600 mb-4">Boletos del <strong>00 al 99</strong>. Si el resultado es 00, gana el boleto 00.</p>
+    <div class="grid grid-cols-5 md:grid-cols-10 gap-3">
+      <!-- Boletos -->
+      <script>
+        const boletosVendidos = ["03", "07", "15", "22"]; 
+        for (let i = 0; i <= 99; i++) {
+          const num = i.toString().padStart(2, '0');
+          const vendido = boletosVendidos.includes(num);
+          document.write(`
+            <button 
+              ${vendido ? 'disabled' : ''}
+              class="py-2 rounded-lg text-sm font-semibold ${vendido ? 'bg-red-400 text-white cursor-not-allowed' : 'bg-green-500 text-white hover:bg-green-600'}"
+              onclick="seleccionarBoleto('${num}')">
+              ${num}
+            </button>
+          `);
+        }
+      </script>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white py-12">
+  <div class="max-w-3xl mx-auto">
+    <h3 class="text-2xl font-bold mb-4">Registro del boleto</h3>
+    <form class="space-y-4">
+      <input type="text" placeholder="Nombre completo" class="w-full border p-3 rounded-xl" />
+      <input type="tel" placeholder="WhatsApp" class="w-full border p-3 rounded-xl" />
+      <input type="text" id="boletoSeleccionado" placeholder="Boleto seleccionado" readonly class="w-full border p-3 rounded-xl bg-gray-100" />
+      <div class="bg-gray-50 p-4 rounded-xl text-sm">
+        <p><strong>Datos de transferencia:</strong></p>
+        <p>Banco: Mercado Pago (SPEI)<br>CLABE: TU_CLABE_MERCADO_PAGO<br>Nombre: Pabe con Causa<br>Concepto: Boleto ##</p>
+      </div>
+      <button type="button" onclick="enviarWhatsApp()" class="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700">Enviar comprobante por WhatsApp</button>
+    </form>
+  </div>
+</section>
+
+<footer class="bg-gray-800 text-white p-6 text-center">
+  <p class="text-sm">© 2026 Pabe con Causa</p>
+  <p class="text-xs">Sorteo basado en los últimos 2 números del Premio Mayor de la Lotería Nacional. Boletos no reembolsables.</p>
+</footer>
+
+<script>
+  let boletoActual = null;
+  function seleccionarBoleto(num) {
+    boletoActual = num;
+    document.getElementById('boletoSeleccionado').value = `Boleto #${num}`;
+  }
+
+  function enviarWhatsApp() {
+    if (!boletoActual) {
+      alert('Selecciona un boleto primero');
+      return;
+    }
+    const texto = `Hola, quiero registrar el boleto #${boletoActual} para la rifa de la pantalla. Ya realicé la transferencia.`;
+    window.open(`https://wa.me/5214651180085?text=${encodeURIComponent(texto)}`, '_blank');
+  }
+</script>
+
+</body>
+</html>
