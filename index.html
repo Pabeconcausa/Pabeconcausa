@@ -7,17 +7,17 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-100 text-gray-800 font-sans">
 
 <header class="bg-green-600 text-white p-6 shadow-lg">
   <div class="max-w-6xl mx-auto flex justify-between items-center">
     <div class="flex items-center gap-4">
-      <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-green-600 font-bold border-2 border-white">
+      <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-green-600 font-bold border-2 border-white text-xs">
         LOGO
       </div>
-      <h1 class="text-2xl font-bold">🍀 Pabe con Causa</h1>
+      <h1 class="text-2xl font-bold uppercase tracking-tight">🍀 Pabe con Causa</h1>
     </div>
-    <span class="text-sm font-semibold">Mercado Pago (SPEI)</span>
+    <span class="hidden md:inline text-sm font-semibold">Mercado Pago (SPEI)</span>
   </div>
 </header>
 
@@ -28,7 +28,19 @@
     <div class="flex justify-center">
       <img src="1.jpg" alt="Premio" class="rounded-2xl shadow-lg max-h-80 w-full object-cover md:w-auto" />
     </div>
-    <p class="text-sm text-gray-500 mt-3 italic">Imagen ilustrativa del premio</p>
+    <p class="text-sm text-gray-500 mt-3 italic underline">Imagen ilustrativa del premio</p>
+  </section>
+
+  <section class="bg-white p-6 rounded-2xl shadow-md border-l-8 border-green-500">
+    <h3 class="text-xl font-bold mb-4 text-green-700">📜 ¿Cómo se elige al ganador?</h3>
+    <div class="text-sm space-y-3 text-gray-700">
+      <p>El ganador se determina utilizando los <strong>últimos 2 números del Premio Mayor de la Lotería Nacional</strong> del sorteo previamente anunciado.</p>
+      <div class="bg-gray-50 p-3 rounded-lg border">
+        <p><strong>Ejemplo:</strong> Si el Premio Mayor es <strong>38427</strong>, el ganador es el boleto <strong>27</strong>.</p>
+        <p>Si el resultado termina en <strong>00</strong>, el boleto ganador es el <strong>00</strong>.</p>
+      </div>
+      <p class="text-xs text-gray-500 italic">El resultado oficial será publicado con evidencia del sorteo.</p>
+    </div>
   </section>
 
   <section class="bg-white p-6 rounded-2xl shadow-md">
@@ -45,7 +57,7 @@
             <button 
               id="btn-${num}"
               ${vendido ? 'disabled' : ''}
-              class="py-3 rounded-lg text-sm font-bold transition-all ${vendido ? 'bg-red-200 text-red-700 cursor-not-allowed border-2 border-red-300' : 'bg-green-500 text-white hover:bg-green-600 border-2 border-green-400'}"
+              class="py-3 rounded-lg text-sm font-bold transition-all ${vendido ? 'bg-red-200 text-red-700 cursor-not-allowed border-2 border-red-300' : 'bg-green-500 text-white hover:bg-green-600 border-2 border-green-400 shadow-sm'}"
               onclick="seleccionarBoleto('${num}')">
               ${num}
             </button>
@@ -54,8 +66,8 @@
       </script>
     </div>
     <div class="mt-6 flex justify-center gap-4 text-[10px] md:text-xs font-bold uppercase">
-      <div class="flex items-center gap-1"><span class="w-4 h-4 bg-green-500 rounded border border-green-700"></span> Libre</div>
-      <div class="flex items-center gap-1"><span class="w-4 h-4 bg-red-600 rounded border border-black"></span> Tu selección</div>
+      <div class="flex items-center gap-1"><span class="w-4 h-4 bg-green-500 rounded border border-green-700 shadow-sm"></span> Libre</div>
+      <div class="flex items-center gap-1"><span class="w-4 h-4 bg-red-600 rounded border border-black shadow-sm"></span> Selección</div>
       <div class="flex items-center gap-1"><span class="w-4 h-4 bg-red-200 rounded border border-red-400"></span> Vendido</div>
     </div>
   </section>
@@ -63,18 +75,18 @@
   <section id="registro" class="bg-white p-6 rounded-2xl shadow-md border-t-8 border-green-600">
     <h3 class="text-2xl font-bold mb-4">2. Registro del boleto</h3>
     <form class="space-y-4">
-      <input type="text" id="nombreInput" placeholder="Nombre completo" class="w-full border p-3 rounded-xl focus:ring-2 focus:ring-green-500 outline-none shadow-sm" />
-      <input type="tel" id="telInput" placeholder="Número de WhatsApp (10 dígitos)" class="w-full border p-3 rounded-xl focus:ring-2 focus:ring-green-500 outline-none shadow-sm" />
-      <input type="text" id="boletoSeleccionado" placeholder="Aún no eliges boleto" readonly class="w-full border p-3 rounded-xl bg-gray-100 font-bold text-green-700 text-center text-xl shadow-inner border-green-200" />
+      <input type="text" id="nombreInput" placeholder="Nombre completo" class="w-full border-2 p-3 rounded-xl focus:border-green-600 outline-none shadow-sm" />
+      <input type="tel" id="telInput" placeholder="Número de WhatsApp (10 dígitos)" class="w-full border-2 p-3 rounded-xl focus:border-green-600 outline-none shadow-sm" />
+      <input type="text" id="boletoSeleccionado" placeholder="Aún no eliges boleto" readonly class="w-full border-2 p-3 rounded-xl bg-gray-50 font-bold text-green-700 text-center text-2xl shadow-inner border-green-200" />
       
-      <div class="bg-green-50 p-4 rounded-xl text-sm border border-green-200 shadow-sm">
-        <p class="font-bold text-green-800 mb-2 underline">Datos para transferencia:</p>
+      <div class="bg-green-50 p-5 rounded-xl text-sm border-2 border-green-200 shadow-sm">
+        <p class="font-bold text-green-800 mb-2 underline text-base text-center">Datos para transferencia:</p>
         <p>Banco: <strong>Mercado Pago (SPEI)</strong></p>
         <p>CLABE: <strong>TU_CLABE_MERCADO_PAGO</strong></p>
         <p>Nombre: <strong>Pabe con Causa</strong></p>
       </div>
       
-      <button type="button" onclick="enviarWhatsApp()" class="w-full bg-green-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition-transform active:scale-95 shadow-lg">
+      <button type="button" onclick="enviarWhatsApp()" class="w-full bg-green-600 text-white py-4 rounded-xl font-bold text-xl hover:bg-green-700 transition-transform active:scale-95 shadow-lg">
         Registrar y enviar por WhatsApp 🚀
       </button>
     </form>
@@ -82,8 +94,16 @@
 
 </main>
 
-<footer class="bg-gray-800 text-white p-8 text-center mt-12">
-  <p class="text-sm">© 2026 Pabe con Causa</p>
+<footer class="bg-gray-800 text-white p-10 text-center mt-12 space-y-4">
+  <div class="max-w-2xl mx-auto space-y-2 opacity-80">
+    <h4 class="font-bold text-green-400">Transparencia y Gestión</h4>
+    <p class="text-[11px] leading-relaxed">
+      Esta rifa es organizada con fines de beneficencia. El organizador retendrá el <strong>15% del total recaudado</strong> por concepto de administración, gestión de la plataforma y difusión. El monto restante será destinado íntegramente a la causa y al pago del premio estipulado.
+    </p>
+  </div>
+  <div class="pt-6 border-t border-gray-700">
+    <p class="text-xs">© 2026 Pabe con Causa. Boletos no reembolsables.</p>
+  </div>
 </footer>
 
 <script>
@@ -93,15 +113,15 @@
     if (boletoActual) {
       const anterior = document.getElementById(`btn-${boletoActual}`);
       if (anterior) {
-        anterior.classList.remove('bg-red-600', 'border-black');
+        anterior.classList.remove('bg-red-600', 'border-black', 'scale-110');
         anterior.classList.add('bg-green-500', 'border-green-400');
       }
     }
     boletoActual = num;
     const nuevo = document.getElementById(`btn-${num}`);
     nuevo.classList.remove('bg-green-500', 'border-green-400');
-    nuevo.classList.add('bg-red-600', 'border-black');
-    document.getElementById('boletoSeleccionado').value = `BOLETO SELECCIONADO: #${num}`;
+    nuevo.classList.add('bg-red-600', 'border-black', 'scale-110');
+    document.getElementById('boletoSeleccionado').value = `#${num}`;
     document.getElementById('registro').scrollIntoView({ behavior: 'smooth' });
   }
 
@@ -114,7 +134,7 @@
       return;
     }
     if (!nombre || !tel) {
-      alert('Llena tu nombre y tu número, no seas gacho.');
+      alert('Nombre y Celular son obligatorios.');
       return;
     }
 
@@ -130,7 +150,7 @@
       const texto = `Hola, soy ${nombre}. Quiero registrar el boleto #${boletoActual}. Mi WhatsApp es ${tel}. Ya realicé la transferencia.`;
       const url = `https://wa.me/5214651180085?text=${encodeURIComponent(texto)}`;
       window.open(url, '_blank');
-    }, 1000);
+    }, 1200);
   }
 </script>
 
