@@ -11,51 +11,48 @@
 <header class="bg-green-600 text-white p-6 shadow-lg">
   <div class="max-w-6xl mx-auto flex justify-between items-center">
     <div class="flex items-center gap-4">
-      <!-- Espacio para logo -->
-      <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-green-600 font-bold">
+      <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-green-600 font-bold border-2 border-white">
         LOGO
       </div>
       <h1 class="text-2xl font-bold">🍀 Pabe con Causa</h1>
     </div>
-    <span class="text-sm">Pago por transferencia (Mercado Pago)</span>
+    <span class="text-sm font-semibold">Mercado Pago (SPEI)</span>
   </div>
 </header>
 
-<section class="bg-white py-12">
-  <div class="max-w-4xl mx-auto mb-10">
-    <h2 class="text-2xl font-bold text-center mb-4">🎁 Premio de la Rifa</h2>
+<main class="max-w-4xl mx-auto p-4 space-y-8">
+  
+  <section class="bg-white p-6 rounded-2xl shadow-md text-center mt-6">
+    <h2 class="text-2xl font-bold mb-4">🎁 Premio de la Rifa</h2>
     <div class="flex justify-center">
-      <img src="1.jpg" alt="Premio" class="rounded-2xl shadow-lg" />
+      <img src="1.jpg" alt="Premio" class="rounded-2xl shadow-lg max-h-80" />
     </div>
-    <p class="text-center text-sm text-gray-600 mt-2">Imagen ilustrativa del premio</p>
- 
-</section>
+    <p class="text-sm text-gray-500 mt-3 italic italic">Imagen ilustrativa del premio</p>
+  </section>
 
-<section class="py-12">
-  <div class="max-w-4xl mx-auto bg-white p-6 rounded-2xl shadow">
-    <h3 class="text-2xl font-bold mb-4 text-center">Rifa con causa – Transparencia</h3>
-    <p class="text-sm mb-2">Esta rifa es organizada por un tercero con el objetivo de apoyar una causa específica.</p>
-    <p class="text-sm mb-2">El organizador cobra un <strong>15% del total recaudado</strong> por gastos de <strong>administración, difusión y gestión</strong>.</p>
-    <p class="text-sm mb-2">El <strong>85% restante</strong> será entregado íntegramente a la causa indicada.</p>
-    <p class="text-sm text-gray-600">El proceso será documentado para garantizar transparencia.</p>
-  </div>
-</section>
+  <section class="bg-white p-6 rounded-2xl shadow-md border-l-4 border-green-500">
+    <h3 class="text-xl font-bold mb-3 text-green-700">Rifa con causa – Transparencia</h3>
+    <div class="text-sm space-y-2">
+      <p>• El <strong>85% de lo recaudado</strong> se entrega a la causa.</p>
+      <p>• Ganador con los últimos 2 números de la <strong>Lotería Nacional</strong>.</p>
+    </div>
+  </section>
 
-<section class="py-12">
-  <div class="max-w-6xl mx-auto">
-    <h3 class="text-2xl font-bold mb-6 text-center">Selecciona tus boletos</h3>
-    <p class="text-center text-sm text-gray-600 mb-4">Boletos del <strong>00 al 99</strong>. Si el resultado es 00, gana el boleto 00.</p>
-    <div class="grid grid-cols-5 md:grid-cols-10 gap-3">
-      <!-- Boletos -->
+  <section class="bg-white p-6 rounded-2xl shadow-md">
+    <h3 class="text-2xl font-bold mb-4 text-center">1. Selecciona tu boleto</h3>
+    <div class="grid grid-cols-5 md:grid-cols-10 gap-2">
       <script>
-        const boletosVendidos = ["00"];
+        // Pon aquí los números que ya te pagaron
+        const boletosVendidos = ["00", "07", "45"]; 
+
         for (let i = 0; i <= 99; i++) {
           const num = i.toString().padStart(2, '0');
           const vendido = boletosVendidos.includes(num);
           document.write(`
             <button 
+              id="btn-${num}"
               ${vendido ? 'disabled' : ''}
-              class="py-2 rounded-lg text-sm font-semibold ${vendido ? 'bg-red-400 text-white cursor-not-allowed' : 'bg-green-500 text-white hover:bg-green-600'}"
+              class="py-3 rounded-lg text-sm font-bold transition-all ${vendido ? 'bg-red-200 text-red-700 cursor-not-allowed' : 'bg-green-500 text-white hover:bg-green-600'}"
               onclick="seleccionarBoleto('${num}')">
               ${num}
             </button>
@@ -63,44 +60,84 @@
         }
       </script>
     </div>
-  </div>
-</section>
+    <div class="mt-4 flex justify-center gap-4 text-xs">
+      <div class="flex items-center gap-1"><span class="w-3 h-3 bg-green-500 rounded"></span> Disponible</div>
+      <div class="flex items-center gap-1"><span class="w-3 h-3 bg-red-600 rounded"></span> Tu selección</div>
+      <div class="flex items-center gap-1"><span class="w-3 h-3 bg-red-200 rounded"></span> Vendido</div>
+    </div>
+  </section>
 
-<section class="bg-white py-12">
-  <div class="max-w-3xl mx-auto">
-    <h3 class="text-2xl font-bold mb-4">Registro del boleto</h3>
+  <section id="registro" class="bg-white p-6 rounded-2xl shadow-md">
+    <h3 class="text-2xl font-bold mb-4">2. Registro del boleto</h3>
     <form class="space-y-4">
-      <input type="text" placeholder="Nombre completo" class="w-full border p-3 rounded-xl" />
-      <input type="tel" placeholder="WhatsApp" class="w-full border p-3 rounded-xl" />
-      <input type="text" id="boletoSeleccionado" placeholder="Boleto seleccionado" readonly class="w-full border p-3 rounded-xl bg-gray-100" />
-      <div class="bg-gray-50 p-4 rounded-xl text-sm">
-        <p><strong>Datos de transferencia:</strong></p>
-        <p>Banco: Mercado Pago (SPEI)<br>CLABE: TU_CLABE_MERCADO_PAGO<br>Nombre: Pabe con Causa<br>Concepto: Boleto ##</p>
+      <input type="text" id="nombreInput" placeholder="Nombre completo" class="w-full border p-3 rounded-xl focus:ring-2 focus:ring-green-500 outline-none" />
+      <input type="tel" id="whatsappInput" placeholder="WhatsApp" class="w-full border p-3 rounded-xl focus:ring-2 focus:ring-green-500 outline-none" />
+      <input type="text" id="boletoSeleccionado" placeholder="Aún no eliges boleto" readonly class="w-full border p-3 rounded-xl bg-gray-100 font-bold text-green-700 shadow-inner" />
+      
+      <div class="bg-green-50 p-4 rounded-xl text-sm border border-green-200">
+        <p class="font-bold text-green-800 mb-1">Datos de transferencia:</p>
+        <p>Banco: <strong>Mercado Pago (SPEI)</strong></p>
+        <p>CLABE: <strong>TU_CLABE_MERCADO_PAGO</strong></p>
+        <p>Nombre: <strong>Pabe con Causa</strong></p>
       </div>
-      <button type="button" onclick="enviarWhatsApp()" class="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700">Enviar comprobante por WhatsApp</button>
+      
+      <button type="button" onclick="enviarWhatsApp()" class="w-full bg-green-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition-transform active:scale-95 shadow-lg">
+        Enviar comprobante por WhatsApp
+      </button>
     </form>
-  </div>
-</section>
+  </section>
 
-<footer class="bg-gray-800 text-white p-6 text-center">
+</main>
+
+<footer class="bg-gray-800 text-white p-8 text-center mt-12">
   <p class="text-sm">© 2026 Pabe con Causa</p>
-  <p class="text-xs">Sorteo basado en los últimos 2 números del Premio Mayor de la Lotería Nacional. Boletos no reembolsables.</p>
+  <p class="text-[10px] text-gray-400 mt-2 italic">Sorteo basado en Lotería Nacional. No reembolsable.</p>
 </footer>
 
 <script>
   let boletoActual = null;
+
   function seleccionarBoleto(num) {
+    // Si ya había uno seleccionado, le regresamos su color verde
+    if (boletoActual) {
+      const anterior = document.getElementById(`btn-${boletoActual}`);
+      if (anterior) {
+        anterior.classList.remove('bg-red-600');
+        anterior.classList.add('bg-green-500');
+      }
+    }
+
+    // Guardamos el nuevo
     boletoActual = num;
-    document.getElementById('boletoSeleccionado').value = `Boleto #${num}`;
+
+    // Pintamos el nuevo de rojo
+    const nuevo = document.getElementById(`btn-${num}`);
+    nuevo.classList.remove('bg-green-500');
+    nuevo.classList.add('bg-red-600');
+
+    // Ponemos el número en el cuadrito de abajo
+    document.getElementById('boletoSeleccionado').value = `Boleto seleccionado: #${num}`;
+    
+    // Un pequeño brinco al formulario para que el usuario sepa qué sigue
+    document.getElementById('registro').scrollIntoView({ behavior: 'smooth' });
   }
 
   function enviarWhatsApp() {
+    const nombre = document.getElementById('nombreInput').value;
+    const whatsapp = document.getElementById('whatsappInput').value;
+
     if (!boletoActual) {
-      alert('Selecciona un boleto primero');
+      alert('¡Primero selecciona un boleto en la tabla de arriba!');
       return;
     }
-    const texto = `Hola, quiero registrar el boleto #${boletoActual} para la rifa de la pantalla. Ya realicé la transferencia.`;
-    window.open(`https://wa.me/5214651180085?text=${encodeURIComponent(texto)}`, '_blank');
+    if (!nombre || !whatsapp) {
+      alert('Por favor llena tu nombre y WhatsApp para el registro.');
+      return;
+    }
+
+    const texto = `Hola, soy ${nombre}. Quiero registrar el boleto #${boletoActual}. Ya hice el pago. Mi WhatsApp es ${whatsapp}.`;
+    const url = `https://wa.me/5214651180085?text=${encodeURIComponent(texto)}`;
+    window.open(url, '_blank');
   }
 </script>
 
