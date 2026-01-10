@@ -32,7 +32,7 @@
   </section>
 
   <section class="bg-white p-6 rounded-2xl shadow-md">
-    <h3 class="text-2xl font-bold mb-4 text-center">1. Selecciona tu boleto</h3>
+    <h3 class="text-2xl font-bold mb-4 text-center text-green-700 italic">1. Selecciona tu boleto</h3>
     <div class="grid grid-cols-5 md:grid-cols-10 gap-2">
       <script>
         // --- AQUÍ PONES LOS NÚMEROS QUE YA TE PAGARON ---
@@ -45,7 +45,7 @@
             <button 
               id="btn-${num}"
               ${vendido ? 'disabled' : ''}
-              class="py-3 rounded-lg text-sm font-bold transition-all ${vendido ? 'bg-red-200 text-red-700 cursor-not-allowed' : 'bg-green-500 text-white hover:bg-green-600'}"
+              class="py-3 rounded-lg text-sm font-bold transition-all ${vendido ? 'bg-red-200 text-red-700 cursor-not-allowed border-2 border-red-300' : 'bg-green-500 text-white hover:bg-green-600 border-2 border-green-400'}"
               onclick="seleccionarBoleto('${num}')">
               ${num}
             </button>
@@ -53,28 +53,29 @@
         }
       </script>
     </div>
-    <div class="mt-4 flex justify-center gap-4 text-[10px] md:text-xs">
-      <div class="flex items-center gap-1"><span class="w-3 h-3 bg-green-500 rounded"></span> Libre</div>
-      <div class="flex items-center gap-1"><span class="w-3 h-3 bg-red-600 rounded"></span> Tu selección</div>
-      <div class="flex items-center gap-1"><span class="w-3 h-3 bg-red-200 rounded"></span> Vendido</div>
+    <div class="mt-6 flex justify-center gap-4 text-[10px] md:text-xs font-bold uppercase">
+      <div class="flex items-center gap-1"><span class="w-4 h-4 bg-green-500 rounded border border-green-700"></span> Libre</div>
+      <div class="flex items-center gap-1"><span class="w-4 h-4 bg-red-600 rounded border border-black"></span> Tu selección</div>
+      <div class="flex items-center gap-1"><span class="w-4 h-4 bg-red-200 rounded border border-red-400"></span> Vendido</div>
     </div>
   </section>
 
-  <section id="registro" class="bg-white p-6 rounded-2xl shadow-md">
+  <section id="registro" class="bg-white p-6 rounded-2xl shadow-md border-t-8 border-green-600">
     <h3 class="text-2xl font-bold mb-4">2. Registro del boleto</h3>
     <form class="space-y-4">
-      <input type="text" id="nombreInput" placeholder="Nombre completo" class="w-full border p-3 rounded-xl focus:ring-2 focus:ring-green-500 outline-none" />
-      <input type="text" id="boletoSeleccionado" placeholder="Aún no eliges boleto" readonly class="w-full border p-3 rounded-xl bg-gray-100 font-bold text-green-700 shadow-inner" />
+      <input type="text" id="nombreInput" placeholder="Nombre completo" class="w-full border p-3 rounded-xl focus:ring-2 focus:ring-green-500 outline-none shadow-sm" />
+      <input type="tel" id="telInput" placeholder="Número de WhatsApp (10 dígitos)" class="w-full border p-3 rounded-xl focus:ring-2 focus:ring-green-500 outline-none shadow-sm" />
+      <input type="text" id="boletoSeleccionado" placeholder="Aún no eliges boleto" readonly class="w-full border p-3 rounded-xl bg-gray-100 font-bold text-green-700 text-center text-xl shadow-inner border-green-200" />
       
-      <div class="bg-green-50 p-4 rounded-xl text-sm border border-green-200">
-        <p class="font-bold text-green-800 mb-1">Datos de transferencia:</p>
+      <div class="bg-green-50 p-4 rounded-xl text-sm border border-green-200 shadow-sm">
+        <p class="font-bold text-green-800 mb-2 underline">Datos para transferencia:</p>
         <p>Banco: <strong>Mercado Pago (SPEI)</strong></p>
         <p>CLABE: <strong>TU_CLABE_MERCADO_PAGO</strong></p>
         <p>Nombre: <strong>Pabe con Causa</strong></p>
       </div>
       
       <button type="button" onclick="enviarWhatsApp()" class="w-full bg-green-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition-transform active:scale-95 shadow-lg">
-        Registrar y enviar por WhatsApp
+        Registrar y enviar por WhatsApp 🚀
       </button>
     </form>
   </section>
@@ -92,26 +93,28 @@
     if (boletoActual) {
       const anterior = document.getElementById(`btn-${boletoActual}`);
       if (anterior) {
-        anterior.classList.remove('bg-red-600');
-        anterior.classList.add('bg-green-500');
+        anterior.classList.remove('bg-red-600', 'border-black');
+        anterior.classList.add('bg-green-500', 'border-green-400');
       }
     }
     boletoActual = num;
     const nuevo = document.getElementById(`btn-${num}`);
-    nuevo.classList.remove('bg-green-500');
-    nuevo.classList.add('bg-red-600');
-    document.getElementById('boletoSeleccionado').value = `Boleto seleccionado: #${num}`;
+    nuevo.classList.remove('bg-green-500', 'border-green-400');
+    nuevo.classList.add('bg-red-600', 'border-black');
+    document.getElementById('boletoSeleccionado').value = `BOLETO SELECCIONADO: #${num}`;
     document.getElementById('registro').scrollIntoView({ behavior: 'smooth' });
   }
 
   function enviarWhatsApp() {
     const nombre = document.getElementById('nombreInput').value;
+    const tel = document.getElementById('telInput').value;
+
     if (!boletoActual) {
-      alert('¡Selecciona un boleto primero!');
+      alert('¡Selecciona un boleto arriba primero!');
       return;
     }
-    if (!nombre) {
-      alert('Pon tu nombre, no seas gacho.');
+    if (!nombre || !tel) {
+      alert('Llena tu nombre y tu número, no seas gacho.');
       return;
     }
 
@@ -122,9 +125,9 @@
       origin: { y: 0.6 }
     });
 
-    // Abrir WhatsApp después de un segundo para que vean el confeti
+    // Pequeña espera para el efecto visual
     setTimeout(() => {
-      const texto = `Hola, soy ${nombre}. Quiero registrar el boleto #${boletoActual}. Ya hice el pago.`;
+      const texto = `Hola, soy ${nombre}. Quiero registrar el boleto #${boletoActual}. Mi WhatsApp es ${tel}. Ya realicé la transferencia.`;
       const url = `https://wa.me/5214651180085?text=${encodeURIComponent(texto)}`;
       window.open(url, '_blank');
     }, 1000);
